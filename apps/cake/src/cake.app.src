@@ -1,0 +1,15 @@
+{application, 'cake',
+ [{description, "An LFE application"},
+  {vsn, git},
+  {registered, []},
+  {mod, {'cake-app', []}},
+  {applications,
+   [kernel,
+    stdlib
+   ]},
+  {env,[]},
+  {modules, []},
+
+  {licenses, ["Apache 2.0"]},
+  {links, []}
+ ]}.
