@@ -1,15 +1,14 @@
 # Cake
-Cake is a engine to build online games that encourage conversation on complex issues.
 
 [![Build Status][travis badge]][travis]
 [![LFE Versions][lfe badge]][lfe]
-[![Erlang Versions][erlang badge]][versions]
+![Erlang Versions][erlang badge]
+<!---
 [![Tag][github tag badge]][github tag]
 [![Downloads][hex downloads]][hex package]
+-->
 
-[![Project Logo][logo]][logo-large]
-
-*An LFE application*
+Cake is a engine to build online games that encourage conversation on complex issues.
 
 ##### Table of Contents
 
@@ -54,8 +53,6 @@ Copyright © 2020, Dennis J. Drown
 
 <!-- Named page links below: /-->
 
-[logo]: https://avatars1.githubusercontent.com/u/3434967?s=250
-[logo-large]: https://avatars1.githubusercontent.com/u/3434967
 [github]: https://github.com/ORG/cake
 [gitlab]: https://gitlab.com/ORG/cake
 [travis]: https://travis-ci.org/ORG/cake
