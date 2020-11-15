@@ -8,7 +8,7 @@
 [![Downloads][hex downloads]][hex package]
 -->
 
-Cake is a engine to build online games that encourage conversation on complex issues.
+Cake is an engine to build online games that encourage conversation on complex issues.
 
 ##### Table of Contents
 
