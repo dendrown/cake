@@ -27,7 +27,7 @@
     (pid 0)
     (echo 1)
     (fizzbuzz 0) (fizzbuzz 1) (fizzbuzz 2))
-  (import (from lists (foldl 2))
+  (import (from lists (foldl 3) (foldr 3))
           (from maps  (fold 3) (get 2))))
 
 
@@ -109,35 +109,45 @@
   (fizzbuzz 100))
 
 
-(defun fizzbuzz (n)
+(defun fizzbuzz
   "There is no good reason to have this here..."
-  (fizzbuzz n #M()))
+  ((n) (when (is_integer n))
+  (fizzbuzz n '()))
+
+  ((words)
+  (fizzbuzz 100 words)))
 
 
-(defun fizzbuzz (n words)
-  "There is no good reason to have this here..."
-  (flet ((gen-check (_ x)
+(defun fizzbuzz
+  ;"There is no good reason to have this here..."
+  ((n words) (when (is_map words))
+  (fizzbuzz n
+            (maps:to_list words)))
+
+  ((n words)
+  ;; With a proplist, the user can control the word order
+  (flet ((gen-check (((tuple word x))
            ;; Function to check when the count is divisible by x
-           (lambda (cnt)
-             (=:= 0 (rem cnt x))))
+           (tuple word
+                  (lambda (cnt)
+                    (=:= 0 (rem cnt x))))))
 
-         (wordify (cnt funs)
+         (wordify (cnt checks)
            ;; Build (compound) word(s) according to what divides it
            (lists:flatten
-             (fold (lambda (word check acc)
-                     (if (funcall check cnt)
-                         (io_lib:format "~s~s" (list word acc))
-                          acc))
-                   ""
-                   funs))))
+             (foldr (match-lambda (((tuple word check) acc)
+                      (if (funcall check cnt)
+                          (io_lib:format "~s~s" (list word acc))
+                           acc)))
+                    ""
+                    checks))))
 
-    (let ((funs (maps:map (fun gen-check 2)
-                          (maps:merge words
-                                      #M(fizz 3
-                                         buzz 5)))))
+    (let ((checks (lists:map (fun gen-check 1)
+                           (++ '(#(fizz 3)
+                                 #(buzz 5))
+                               words))))
       (lists:map (lambda (cnt)
-                   (case (wordify cnt funs)
+                   (case (wordify cnt checks)
                      (""   cnt)
                      (word word)))
-                 (lists:seq 1 n)))))
-
+                 (lists:seq 1 n))))))
