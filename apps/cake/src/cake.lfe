@@ -137,12 +137,12 @@
            (lists:flatten
              (foldr (match-lambda (((tuple word check) acc)
                       (if (funcall check cnt)
-                          (io_lib:format "~s~s" (list word acc))
+                          (io_lib:format "~s~s" `(,word ,acc))
                            acc)))
                     ""
                     checks))))
 
-    (let ((checks (lists:map (fun gen-check 1)
+    (let ((checks (lists:map #'gen-check/1
                            (++ '(#(fizz 3)
                                  #(buzz 5))
                                words))))
