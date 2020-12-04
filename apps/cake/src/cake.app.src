@@ -1,5 +1,6 @@
+%% -*- mode: erlang -*-
 {application, 'cake',
- [{description, "An LFE application"},
+ [{description, "A game engine to encourage conversation on complex issues"},
   {vsn, git},
   {registered, []},
   {mod, {'cake-app', []}},
@@ -8,8 +9,8 @@
     stdlib
    ]},
   {env,[]},
-  {modules, []},
+  {modules, [cake, llog]},
 
-  {licenses, ["Apache 2.0"]},
+  {licenses, ["GPL 3.0"]},
   {links, []}
  ]}.

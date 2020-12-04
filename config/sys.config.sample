@@ -1,4 +1,9 @@
 %% -*- mode: erlang -*-
 [
+  {lager, [{log_root, "/tmp/cake/log"},
+           {colored, true},
+           {handlers, [{lager_console_backend, [{level, debug}]},
+                       {lager_file_backend,    [{level, error}, {file, "error.log"}]},
+                       {lager_file_backend,    [{level, info},  {file, "console.log"}]} ]} ]},
   {'cake', []}
 ].
