@@ -24,7 +24,7 @@
 (defun start (_type _args)
   (llog:start)
   (logger:set_application_level 'cake 'all)
-  (llog:log 'notice 'cake  "Let us eat cake...")            ; FIXME!
+  (llog:notice "Let us eat cake...")
   (cake-sup:start_link))
 
 

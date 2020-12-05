@@ -11,26 +11,29 @@
 ;;;; @copyright 2020 Dennis Drown and Ostrich Ideas
 ;;;; -------------------------------------------------------------------------
 (defmodule llog
+  (export-macro debug info notice warning error critical alert emergency)
   (export
     (start 0)
     (log 3)
     (log 4)))
 
-
-(defmacro llogger (level)
-  "Generate logging macros for the specified log level."
-  `(progn
-     ;; Level loggers need to be macros to pick up the caller's module
-     (defmacro ,level (fmt)
-       (llog:log level (MODULE) fmt))
-
-     (defmacro ,level (fmt args)
-       (llog:log level (MODULE) fmt args))))
+;; Log level commands must be macros so we pull the MODULE of the CALLER
+(defmacro logger (level)
+  "Creates a log level command called via (llog:level ...)"
+  `(defmacro ,level args
+     `(llog:log ',',level (MODULE) ,@args)))
 
 
 ;; Shortcuts for standard lager levels (and RFC-3164/syslog keywords)
-(llogger debug)
-(llogger info)
+(logger emergency)
+(logger alert)
+(logger critical)
+(logger error)
+(logger warning)
+(logger notice)
+(logger info)
+(logger debug)
+
 
 ;;; --------------------------------------------------------------------------
 ;;; API
