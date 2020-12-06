@@ -30,6 +30,7 @@
   (import (from lists (foldl 3) (foldr 3))
           (from maps  (fold 3) (get 2))))
 
+(include-file "icing.lfe")
 
 
 ;;; --------------------------------------------------------------------------
@@ -137,7 +138,7 @@
            (lists:flatten
              (foldr (match-lambda (((tuple word check) acc)
                       (if (funcall check cnt)
-                          (io_lib:format "~s~s" `(,word ,acc))
+                          (io_lib:format "~s~s" (@ word acc))
                            acc)))
                     ""
                     checks))))

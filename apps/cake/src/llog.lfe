@@ -11,13 +11,14 @@
 ;;;; @copyright 2020 Dennis Drown and Ostrich Ideas
 ;;;; -------------------------------------------------------------------------
 (defmodule llog
-  (export-macro debug info notice warning error critical alert emergency)
   (export
     (start 0)
     (log 3)
-    (log 4)))
+    (log 4))
+  (export-macro debug info notice warning error critical alert emergency))
 
-;; Log level commands must be macros so we pull the MODULE of the CALLER
+
+;; Log level commands must be macros so we pull the MODULE of the caller
 (defmacro logger (level)
   "Creates a log level command called via (llog:level ...)"
   `(defmacro ,level args
@@ -45,12 +46,12 @@
 
 (defun log (level entity fmt)
   "Handles log messages via lager."
-  (log level entity fmt '()))
+  (log level entity fmt ()))
 
 
 (defun log (level entity fmt args)
   "Handles log messages via lager."
   (lager:log level (self)
              (++ "<~s> " fmt)
-             (cons entity  args)))
+             (cons entity args)))
 
