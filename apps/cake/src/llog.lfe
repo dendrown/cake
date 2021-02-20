@@ -41,6 +41,7 @@
 ;;; --------------------------------------------------------------------------
 (defun start ()
   "Quick-start for an application's logging needs."
+  (application:ensure_all_started 'lager)
   (lager:start))
 
 

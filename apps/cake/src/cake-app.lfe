@@ -22,8 +22,12 @@
 ;;; API
 ;;; --------------------------------------------------------------------------
 (defun start (_type _args)
-  (llog:start)
+  "Main application startup."
+  ;; Erlang/OTP 21 logging is reserved pending design decisions on structured logging.
+  ;; We are using lager via the llog module for prototyping and initial development.
   (logger:set_application_level 'cake 'all)
+  (logger:info "Starting cake application ...")
+  (llog:start)
   (llog:notice "Let us eat cake...")
   (cake-sup:start_link))
 
